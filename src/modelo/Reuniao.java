@@ -41,6 +41,11 @@ public class Reuniao {
 		return pessoas;
 	}
 
+	public void addPessoa(Pessoa pessoa) {
+			pessoas.add(pessoa);
+	}
+
+
 	@Override
 	public String toString() {
 		return "Reuniao [id=" + id + ", data=" + data + ", assunto=" + assunto + ", pessoas=" + pessoas + "]";
