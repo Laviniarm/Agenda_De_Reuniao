@@ -8,12 +8,13 @@ public class Reuniao {
 	private String assunto;
 	private ArrayList <Pessoa> pessoas = new ArrayList<>();
 	
-	public Reuniao(String data, String assunto) {
+	public Reuniao(int id, String data, String assunto) {
 		this.data = data;
 		this.assunto = assunto;
 	}
 
 	public int getId() {
+
 		return id;
 	}
 

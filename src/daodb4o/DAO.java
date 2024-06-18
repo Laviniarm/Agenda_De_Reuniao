@@ -57,7 +57,7 @@ public abstract class DAO<T> implements DAOInterface<T> {
 		}
 	}
 
-	// --------transa��o---------------
+	// --------transacao---------------
 	public static void begin() {
 	} // tem que ser vazio
 
@@ -69,40 +69,4 @@ public abstract class DAO<T> implements DAOInterface<T> {
 		manager.rollback();
 	}
 
-	// gerar novo id para uma classe T
-	// consulta o maior valor armazenado no atributo "id"
-
-	public int gerarId() {
-		@SuppressWarnings("unchecked")
-		Class<T> type = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-				.getActualTypeArguments()[0];
-
-		// verificar se o banco esta vazio
-		if (manager.query(type).size() == 0) {
-			return 1; // primeiro id gerado
-		} else {
-			// obter o maior valor de id para o tipo
-			Query q = manager.query();
-			q.constrain(type);
-			q.descend("id").orderDescending();
-			List<T> resultados = q.execute();
-			if (resultados.isEmpty())
-				return 1; // nenhum resultado, retorna primeiro id
-			else
-				try {
-					// obter objeto localizado
-					T objeto = resultados.get(0);
-					Field atributo = type.getDeclaredField("id");
-					atributo.setAccessible(true);
-					// obter atributo id do objeto localizado e incrementa-lo
-					int maxid = (Integer) atributo.get(objeto); // valor do id
-					return maxid + 1;
-
-				} catch (NoSuchFieldException e) {
-					throw new RuntimeException("classe " + type + " - nao tem atributo id");
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException("classe " + type + " - atributo id inacessivel");
-				}
-		}
-	}
 }
