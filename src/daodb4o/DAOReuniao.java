@@ -1,6 +1,5 @@
 package daodb4o;
 
-import java.util.Date;
 import java.util.List;
 import com.db4o.query.Query;
 
@@ -16,11 +15,15 @@ public class DAOReuniao extends DAO<Reuniao> {
 		return (Reuniao) query.execute().get(0);
 	}
 
-	public List<Reuniao> reunioesNaData(Date data) {
+	public List<Reuniao> reunioesNaData(String data) {
 		Query query = manager.query();
 		query.constrain(Reuniao.class);
 		query.descend("data").constrain(data);
-		return query.execute();
+		List<Reuniao> resultados = query.execute();
+		if (resultados.size()>0)
+			return resultados;
+		else
+			return null;
 	}
 
 	public List<Reuniao> reunioesComPessoa(String nomePessoa) {
@@ -36,4 +39,5 @@ public class DAOReuniao extends DAO<Reuniao> {
 		query.descend("reunioes").constrain(n).greater();
 		return query.execute();
 	}
+
 }

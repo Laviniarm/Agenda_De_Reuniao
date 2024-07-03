@@ -22,6 +22,13 @@ public ArrayList<Reuniao> getReuniao() {
 	return reunioes;
 }
 
+public ArrayList<String> getAssuntosReunioes() {
+	ArrayList<String> assuntosreunioes = new ArrayList<>();
+	for (Reuniao r : reunioes)
+		assuntosreunioes.add(r.getAssunto());
+	return assuntosreunioes;
+}
+
 public void adicionar(Reuniao a){
 	reunioes.add(a);
 }
@@ -32,7 +39,7 @@ public void remover(Reuniao a){
 
 @Override
 public String toString() {
-	return "Pessoa [nome=" + nome + ", reunioes=" + reunioes + "]";
+	return "Pessoa [nome=" + nome + ", reunioes=" + getAssuntosReunioes() + "]";
 }
 
  

@@ -1,6 +1,4 @@
 package daodb4o;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -10,7 +8,7 @@ import com.db4o.query.Query;
 public abstract class DAO<T> implements DAOInterface<T> {
 	protected static ObjectContainer manager;
 
-	public void open() {
+	public static void open() {
 		manager = Util.conectarBanco();
 	}
 

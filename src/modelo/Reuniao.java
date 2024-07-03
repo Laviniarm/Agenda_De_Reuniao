@@ -9,6 +9,7 @@ public class Reuniao {
 	private ArrayList <Pessoa> pessoas = new ArrayList<>();
 	
 	public Reuniao(int id, String data, String assunto) {
+		this.id = id;
 		this.data = data;
 		this.assunto = assunto;
 	}
@@ -41,6 +42,13 @@ public class Reuniao {
 	public ArrayList<Pessoa> getPessoas() {
 		return pessoas;
 	}
+	
+	public ArrayList<String> getNomesPessoas() {
+		ArrayList<String> nomespessoas = new ArrayList<>();
+		for (Pessoa p : pessoas)
+			nomespessoas.add(p.getNome());
+		return nomespessoas;
+	}
 
 	public void addPessoa(Pessoa pessoa) {
 			pessoas.add(pessoa);
@@ -49,8 +57,7 @@ public class Reuniao {
 
 	@Override
 	public String toString() {
-		return "Reuniao [id=" + id + ", data=" + data + ", assunto=" + assunto + ", pessoas=" + pessoas + "]";
+		return "Reuniao [id=" + id + ", data=" + data + ", assunto=" + assunto + ", pessoas=" + getNomesPessoas() + "]";
 	}
 
-	
 }
