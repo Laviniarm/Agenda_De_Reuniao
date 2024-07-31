@@ -26,9 +26,14 @@ public class Cadastrar {
 	        ArrayList<String> nomesPessoas = new ArrayList<>(Arrays.asList(nomesArray));
 			Fachada.criarReuniao(1, "01/10/2024", "Projeto de POB", nomesPessoas);
 			
-			String[] nomesArray2 = {"Lucas", "Heitor"};
+			String[] nomesArray2 = {"Lucas", "Heitor", "Raiza"};
 	        ArrayList<String> nomesPessoas2 = new ArrayList<>(Arrays.asList(nomesArray2));
 			Fachada.criarReuniao(2, "17/10/2024", "Aniversário de Lucas", nomesPessoas2);
+
+			String[] nomesArray3 = {"Raiza", "Lavinia"};
+			ArrayList<String> nomesPessoas3 = new ArrayList<>(Arrays.asList(nomesArray));
+			Fachada.criarReuniao(3, "02/11/2024", "Projeto de PWB1", nomesPessoas3);
+
 		} catch (Exception e) 	{
 			System.out.println(e.getMessage());
 		}

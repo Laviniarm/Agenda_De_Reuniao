@@ -36,8 +36,9 @@ public class DAOReuniao extends DAO<Reuniao> {
 	public List<Pessoa> pessoasComMaisDeNReunioes(int n) {
 		Query query = manager.query();
 		query.constrain(Pessoa.class);
-		query.descend("reunioes").constrain(n).greater();
-		return query.execute();
+		query.descend("reunioes");
+		List<Pessoa> resultado = query.execute();
+		return resultado.stream().filter(pessoa -> pessoa.getReuniao().size() > n).toList();
 	}
 
 }

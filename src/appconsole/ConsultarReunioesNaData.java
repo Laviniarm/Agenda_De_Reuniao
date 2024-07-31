@@ -1,11 +1,10 @@
 package appconsole;
 
-import modelo.Pessoa;
 import modelo.Reuniao;
 import regras_de_negocio.Fachada;
 
-public class Consultar {
-	public Consultar(){
+public class ConsultarReunioesNaData {
+	public ConsultarReunioesNaData(){
 		
 		try {
 			Fachada.inicializar();
@@ -25,7 +24,7 @@ public class Consultar {
 
 	//=================================================
 	public static void main(String[] args) {
-		new Consultar();
+		new ConsultarReunioesNaData();
 	}
 }
 
