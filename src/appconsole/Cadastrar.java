@@ -39,7 +39,7 @@ public class Cadastrar {
 		}
 
 		Fachada.finalizar();
-		System.out.println("Reuniões cadastradas com sucesso!");
+		System.out.println("Reuniões e pessoas cadastradas com sucesso!");
 	}
 
 	

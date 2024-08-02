@@ -10,7 +10,7 @@ public class Alterar {
         try {
             Fachada.inicializar();
             System.out.println("Alterando o assunto da reunião com ID 1...\n");
-            Fachada.alterarAssuntoReuniao(1, "Novo Assunto");
+            Fachada.alterarAssuntoReuniao(1, "Novo Projeto de POB");
 
             System.out.println("\n Listagem de reuniões após alteração:");
             for(Reuniao r: Fachada.listarReunioes())

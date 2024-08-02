@@ -1,6 +1,9 @@
 package daodb4o;
 
 import java.util.List;
+
+import com.db4o.query.Candidate;
+import com.db4o.query.Evaluation;
 import com.db4o.query.Query;
 
 import modelo.Pessoa;
@@ -32,9 +35,25 @@ public class DAOReuniao extends DAO<Reuniao> {
 	public List<Pessoa> pessoasComMaisDeNReunioes(int n) {
 		Query query = manager.query();
 		query.constrain(Pessoa.class);
-		query.descend("reunioes");
-		List<Pessoa> resultado = query.execute();
-		return resultado.stream().filter(pessoa -> pessoa.getReuniao().size() > n).toList();
+		query.constrain((new Filtro(n)));
+		return query.execute();
+	}
+	
+	class Filtro implements Evaluation {
+		private int n;
+		public Filtro(int n) {
+			this.n = n;
+		}
+		public void evaluate(Candidate candidate) {
+			Pessoa pessoa = (Pessoa) candidate.getObject();
+			if(pessoa.getReuniao().size() > n) 
+				candidate.include(true); 
+			else		
+				candidate.include(false);
+		}
 	}
 
+
 }
+
+
