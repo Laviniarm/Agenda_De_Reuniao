@@ -13,7 +13,7 @@ public class Listar {
 			for(Pessoa p : Fachada.listarPessoas())
 				System.out.println(p);
 
-			System.out.println("\n Listagem de reuniões:");
+			System.out.println("\nListagem de reuniões:");
 			for(Reuniao r: Fachada.listarReunioes())
 				System.out.println(r);
 

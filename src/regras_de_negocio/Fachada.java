@@ -40,7 +40,6 @@ public class Fachada {
             return pessoa;
 
         } catch (Exception e) {
-            DAO.rollback();
             throw e;
         }
     }
@@ -55,12 +54,10 @@ public class Fachada {
                 throw new Exception("A data não pode ser anterior a de hoje.");
             }
         } catch (DateTimeParseException e) {
-            DAO.rollback();
             throw new Exception("Formato de data inválido: " + data);
         }
 
         if (nomesPessoas.size() < 2) {
-            DAO.rollback();
             throw new Exception("Uma reunião deve ter no mínimo 2 pessoas.");
         }
 
@@ -70,13 +67,11 @@ public class Fachada {
             Pessoa p = daoPessoa.read(nome);
 
             if (p == null) {
-                DAO.rollback();
                 throw new Exception("Pessoa " + nome + " não encontrada.");
             }
 
             for (Reuniao r : p.getReuniao()) {
                 if (r.getData().equals(data)) {
-                    DAO.rollback();
                     throw new Exception("A pessoa " + p.getNome() + " já está participando de outra reunião ao mesmo tempo.");
                 }
             }
@@ -104,7 +99,6 @@ public class Fachada {
             DAO.commit();
 
         } catch (Exception e) {
-            DAO.rollback();
             throw e;
         }
 
@@ -121,7 +115,6 @@ public class Fachada {
             daoPessoa.update(pessoa);
             DAO.commit();
         } catch (Exception e) {
-            DAO.rollback();
             throw e;
         }
 
@@ -143,7 +136,6 @@ public class Fachada {
             DAO.commit();
 
         } catch (Exception e) {
-            DAO.rollback();
             throw e;
         }
     }
@@ -161,7 +153,6 @@ public class Fachada {
             daoPessoa.delete(pessoa);
             DAO.commit();
         } catch (Exception e) {
-            DAO.rollback();
             throw e;
         }
 

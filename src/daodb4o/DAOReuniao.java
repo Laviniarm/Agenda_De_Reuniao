@@ -19,11 +19,7 @@ public class DAOReuniao extends DAO<Reuniao> {
 		Query query = manager.query();
 		query.constrain(Reuniao.class);
 		query.descend("data").constrain(data);
-		List<Reuniao> resultados = query.execute();
-		if (resultados.size()>0)
-			return resultados;
-		else
-			return null;
+		return query.execute();
 	}
 
 	public List<Reuniao> reunioesComPessoa(String nomePessoa) {

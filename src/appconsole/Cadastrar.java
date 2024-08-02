@@ -21,7 +21,7 @@ public class Cadastrar {
 		}
 
 		try {
-			System.out.println("cadastrando reuniões...");
+			System.out.println("cadastrando reuniões...\n");
 			String[] nomesArray = {"Raiza", "Lavinia"};
 	        ArrayList<String> nomesPessoas = new ArrayList<>(Arrays.asList(nomesArray));
 			Fachada.criarReuniao(1, "01/10/2024", "Projeto de POB", nomesPessoas);
@@ -39,7 +39,7 @@ public class Cadastrar {
 		}
 
 		Fachada.finalizar();
-		System.out.println("Cadastrado com sucesso!");
+		System.out.println("Reuniões cadastradas com sucesso!");
 	}
 
 	
