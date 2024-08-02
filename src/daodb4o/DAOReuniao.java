@@ -38,7 +38,8 @@ public class DAOReuniao extends DAO<Reuniao> {
 		query.constrain((new Filtro(n)));
 		return query.execute();
 	}
-	
+
+
 	class Filtro implements Evaluation {
 		private int n;
 		public Filtro(int n) {
