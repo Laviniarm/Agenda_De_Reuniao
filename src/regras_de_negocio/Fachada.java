@@ -48,6 +48,11 @@ public class Fachada {
         DAO.begin();
 
         try {
+//        	Reuniao reuniaoExistente = daoReuniao.read(id);
+//            if (reuniaoExistente != null) {
+//                throw new Exception("Já existe uma reunião com o ID: " + id);
+//            }
+            
             LocalDate dt = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             LocalDate hoje = LocalDate.now();
             if (dt.isBefore(hoje)) {
@@ -139,6 +144,37 @@ public class Fachada {
             throw e;
         }
     }
+    
+    public static Reuniao buscarReuniao(int id) throws Exception {
+        DAO.begin();
+        try {
+            Reuniao reuniao = daoReuniao.read(id);
+            if (reuniao == null ) {
+                throw new Exception("Reuniao não encontrada.");
+            }
+            DAO.commit();
+            return reuniao;
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+    
+    public static Pessoa buscarPessoa(String nome) throws Exception {
+        DAO.begin();
+        try {
+            Pessoa pessoa = daoPessoa.read(nome);
+            if (pessoa == null ) {
+                throw new Exception("Pessoa não encontrada");
+            }
+            DAO.commit();
+            return pessoa;
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+    
     public static void deletarPessoa(String nome) throws Exception {
         DAO.begin();
         try {
@@ -161,6 +197,7 @@ public class Fachada {
         public static List<Pessoa> listarPessoas () {
             return daoPessoa.readAll();
         }
+      
 
         public static List<Reuniao> listarReunioes () {
             return daoReuniao.readAll();
