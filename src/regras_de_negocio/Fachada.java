@@ -90,6 +90,24 @@ public class Fachada {
         }
         DAO.commit();
     }
+    
+    public static void addPessoaReuniao(String nome, Reuniao reuniao) throws Exception {
+        DAO.begin();
+
+        Pessoa p = daoPessoa.read(nome);   
+        if (p == null) {
+            criarPessoa(nome);
+            Pessoa p2 = daoPessoa.read(nome);
+            reuniao.addPessoa(p2);
+            p2.adicionar(reuniao);
+            daoPessoa.update(p2);
+        } else {
+        	reuniao.addPessoa(p);
+        	p.adicionar(reuniao);
+        	daoPessoa.update(p);
+        }
+        DAO.commit();  
+    }
 
     public static void alterarAssuntoReuniao(int idReuniao, String novoAssunto) throws Exception {
         DAO.begin();
