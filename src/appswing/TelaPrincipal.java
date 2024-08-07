@@ -132,7 +132,9 @@ public class TelaPrincipal {
 					nomesPessoas.clear();
 				} catch (Exception ex) {
                 	label.setText("Erro: " + ex.getMessage());
-                }
+                }finally {
+		            button_3.doClick();
+		        }
 			}
 		});
 		button.setBounds(295, 211, 182, 23);
@@ -226,9 +228,7 @@ public class TelaPrincipal {
 		            textField_3.setText("");
 		        } catch (Exception ex) {
 		            label.setText("Erro: " + ex.getMessage());
-		        } finally {
-		            button_3.doClick();
-		        }
+		        } 
 		        
 		    }
 		});
