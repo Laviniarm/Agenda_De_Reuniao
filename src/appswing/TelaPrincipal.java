@@ -46,6 +46,9 @@ public class TelaPrincipal {
 	private JButton button_1;
 	private ArrayList<String> nomesPessoas;
 	private JScrollPane scrollPane_1;
+	private JButton button_2;
+	private JButton button_4;
+	private JButton button_5;
 
 	/**
 	 * Launch the application.
@@ -78,7 +81,7 @@ public class TelaPrincipal {
 		Fachada.inicializar();
 		frame = new JFrame();
 		frame.setTitle("Agenda de Reuniões");
-		frame.setBounds(100, 100, 502, 337);
+		frame.setBounds(100, 100, 502, 384);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -194,7 +197,7 @@ public class TelaPrincipal {
 		scrollPane_1.setViewportView(textArea);
 		
 		label = new JLabel("");
-		label.setBounds(10, 273, 466, 14);
+		label.setBounds(10, 279, 275, 23);
 		frame.getContentPane().add(label);
 	
 		nomesPessoas = new ArrayList<>();
@@ -233,24 +236,58 @@ public class TelaPrincipal {
 		button_1.setBounds(436, 117, 41, 23);
 		frame.getContentPane().add(button_1);
 		
-		table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 1) {
-                    int selectedRow = table.getSelectedRow();
-                    if (selectedRow != -1) {
-                        int id = (int) table.getValueAt(selectedRow, 0);
-                        abrirReuniao(id);
-                    }
-                }
-            }
-        });
+		button_2 = new JButton("Excluir Reunião");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					int id = (int) table.getValueAt(selectedRow, 0);
+					try {
+						Fachada.deletarReuniao(id);
+						listagemReunioes();
+						label.setText("Reunião excluída com sucesso.");
+					} catch (Exception ex) {
+						label.setText("Erro ao excluir reunião: " + ex.getMessage());
+					}
+				} else {
+					label.setText("Selecione uma reunião para excluir.");
+				}
+			}
+		});
+		button_2.setBounds(296, 313, 181, 23);
+		frame.getContentPane().add(button_2);
+		
+		button_4 = new JButton("Ver Reunião");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					int id = (int) table.getValueAt(selectedRow, 0);
+					abrirReuniao(id);
+				} else {
+					label.setText("Selecione uma reunião para ver.");
+				}
+			}
+		});
+		button_4.setBounds(296, 279, 181, 23);
+		frame.getContentPane().add(button_4);
+		
+		button_5 = new JButton("Ver Pessoas");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPessoa telaPessoa = new TelaPessoa();
+		        telaPessoa.setVisible(true);
+			}
+		});
+		button_5.setBounds(10, 313, 275, 23);
+		frame.getContentPane().add(button_5);
 	}
 	
 	private void abrirReuniao(int id) {
         try {
             Reuniao reuniao = Fachada.buscarReuniao(id);
             if (reuniao != null) {
-                TelaReuniao telareuniao = new TelaReuniao(reuniao);
+            	TelaReuniao telareuniao = new TelaReuniao(reuniao, this);
                 telareuniao.setVisible(true);
             } else {
                 label.setText("Reunião não encontrada.");
